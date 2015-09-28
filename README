@@ -1,0 +1,1 @@
+Start with: freeswitch -conf conf/ -log /var/log/freeswitch/ -db /var/run/freeswitch/

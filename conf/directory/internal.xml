@@ -1,0 +1,20 @@
+<include>
+  <domain name="$${local_sip_ip}">
+    <user id="1000">
+      <params>
+        <param name="password" value="1234"/>
+      </params>
+    </user>
+    <user id="1001">
+      <params>
+        <param name="password" value="1234"/>
+      </params>
+    </user>
+    <user id="1002">
+      <params>
+        <param name="password" value="1234"/>
+      </params>
+    </user>
+  </domain>
+</include>
+

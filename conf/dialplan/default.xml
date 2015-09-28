@@ -1,0 +1,31 @@
+<include>
+  <context name="default">
+    <extension name="unloop">
+      <condition field="${unroll_loops}" expression="^true$"/>
+      <condition field="${sip_looped_call}" expression="^true$">
+	    <action application="deflect" data="${destination_number}"/>
+      </condition>
+    </extension>
+
+    <extension name="outside_call" continue="true">
+      <condition>
+        <action application="set" data="outside_call=true"/>
+        <action application="set" data="RFC2822_DATE=${strftime(%a, %d %b %Y %T %z)}"/>
+      </condition>
+    </extension>
+
+    <extension name="dial">
+      <condition field="destination_number" expression="^\d+$">
+        <action application="bind_digit_action" data="digits,1,exec:execute_extension,transfer XML default,peer,peer"/>
+        <action application="bridge" data="${sofia_contact(${destination_number}@${local_sip_ip})}"/>
+      </condition>
+    </extension>
+
+    <extension name="transfer">
+      <condition field="destination_number" expression="^transfer$">
+        <action application="log" data="INFO ${uuid} just started an attended transfer"/>
+        <action application="att_xfer" data="${sofia_contact(1002@${local_sip_ip})}"/>
+      </condition>
+    </extension>
+  </context>
+</include>
